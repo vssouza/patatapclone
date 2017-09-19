@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Circles</title>
+    <script type="text/javascript" src="js/paper-full.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/circles.css">
+    <script type="text/paperscript" canvas="myCanvas">
+        var blue = 5;
+        for(var i = 5, green = 30; i < (window.innerWidth - 5); i += 100, green += 20) {
+            for(var j = 5, blue = 0; j < (window.innerHeight - 5); j += 100, blue += 10) {
+                new Path.Circle(new Point(i, j), 5).fillColor = "rgb(100," + green + ", " + blue + ")";
+            }
+        }
+    </script>
+</head>
+<body>
+    <canvas id="myCanvas" resize></canvas>
+</body>
+</html>

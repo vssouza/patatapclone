@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patatap Clone</title>
+    <script type="text/javascript" src="js/paper-full.js"></script>
+    <script type="text/javascript" src="js/howler.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/patatap.css">
+    <script type="text/paperscript" canvas="tapCanvas">
+        var circles = [];
+        var re = /^[a-zA-Z0-9]$/;
+
+        var getRadius = function(path) {
+            return path.bounds.width / 2 + path.strokeWidth / 2;
+        }
+
+        function onKeyDown(event) {
+            if((event.key).match(re)) {
+                var howl = new Howl({
+                    src: ['sounds/' + event.key + '.mp3']
+                });
+            }
+            else {
+                var howl = new Howl({
+                    src: ['sounds/a.mp3']
+                });
+            }
+            var radius = Math.floor(Math.random() * 400) + 1;
+            var maxPoint = new Point(view.size.width, view.size.height);
+            var color = "rgb(" + (Math.floor(Math.random() * 255) + 1) + ", " + (Math.floor(Math.random() * 255) + 1) + ", " + (Math.floor(Math.random() * 255) + 1) + ")";
+            var randomPoint = Point.random();
+            var point = maxPoint * randomPoint;
+            var circle = new Path.Circle(point, radius)
+            circle.fillColor = color;
+            circles.push(circle);
+            howl.play();
+        }
+
+        function onFrame(event) {
+                circles.forEach(
+                    function(circle, index) {
+                        circle.fillColor.hue += 5;
+                        circle.scale(.9);
+                        if(getRadius(circle) < 1) {
+                            circle.remove();
+                            circles.splice(index, 1);
+                        }
+                    }
+                );
+        }
+
+    </script>
+</head>
+<body>
+<canvas id="tapCanvas" resize></canvas>
+</body>
+</html>
