@@ -1,4 +1,4 @@
-# patatapclone
+# Patatap Simplified Clone
 Simplified clone of Patatap using howlerjs and paperjs.
 
 
